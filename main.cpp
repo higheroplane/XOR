@@ -4,12 +4,15 @@ int main ()
 {
     float W [MAT_SIZE][MAT_SIZE] = {};
 
-    W[2][0] = 0.45;
-    W[3][0] = 0.78;
-    W[2][1] = -0.12;
-    W[3][1] = 0.13;
-    W[4][2] = 1.5;
-    W[4][3] = -2.3;
+    W[3][0] = 0.45;
+    W[4][0] = 0.78;
+    W[3][1] = -0.12;
+    W[4][1] = 0.13;
+    W[3][2] = 0.05;
+    W[4][2] = 0.03;
+    W[5][3] = 1.5;
+    W[5][4] = -2.3;
+    
 
     nn XOR(W, sigm);
     printf ("00 is %lf\n", XOR.compute(0, 0, MAT_SIZE - 1));
@@ -24,7 +27,7 @@ int main ()
 
     printf ("err is %lf \n\n", XOR.GetError());
 
-    for (int i = 0; i < 1000; i ++)
+    for (int i = 0; i < 10000; i ++)
     {
         
         XOR.bp (1, 0);

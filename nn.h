@@ -2,8 +2,8 @@
 #include <cmath>
 #include <string.h>
 
-const int MAT_SIZE = 5;
-const float epsilon = 1.9, alpha = 0.3;
+const int MAT_SIZE = 6;
+const float epsilon = 1.9, alpha = 0.5;
 
 class nn
 {

@@ -12,6 +12,7 @@ float nn::compute (int i0, int i1, int vertex_num)
     float sum = 0;
     if      (vertex_num == 0) return (float) i0;
     else if (vertex_num == 1) return (float) i1;
+    else if (vertex_num == 2) return 1.0;
     else
     {
         for (int i = 0; i < MAT_SIZE; i ++)
