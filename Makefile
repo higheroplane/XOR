@@ -12,6 +12,5 @@ nn.o: nn.cpp
 	$(CC) $(CFLAGS) -c nn.cpp
 
 
-
 clean:
 	rm -rf *o client server

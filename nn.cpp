@@ -41,13 +41,16 @@ void nn:: bp (int i0, int i1)
     float delta [MAT_SIZE] = {};
 
     float res = compute (i0, i1, MAT_SIZE - 1);
-    delta [MAT_SIZE - 1]  = std::abs ((i1 xor i0) - res) * (1 - res) * res;
+    int ideal = (i1 xor i0);
+    //printf ("=%d=\n", ideal);
+    delta [MAT_SIZE - 1]  =  (ideal - res) * (1 - res) * res;
+   // printf ("delta out = %lf\n\n", delta [MAT_SIZE - 1] ); 
 
-    for (int i = MAT_SIZE - 2; i > 1; i --)
+    for (int i = MAT_SIZE - 2; i >= 0; i --)
     {
         res = compute (i0, i1, i);
         delta [i] = (1 - res) * res;
-        int w_delta = 0;
+        float w_delta = 0;
         float grad [MAT_SIZE] = {};
 
         for (int j = 0; j < MAT_SIZE; j ++)
@@ -55,13 +58,15 @@ void nn:: bp (int i0, int i1)
             if (W[j][i])
             {
                 w_delta += W [j][i] * delta [j];
+                //printf ("deltaj %d = %lf\n", j, w_delta); 
                 grad [j] = delta[j] * res;
                 dW [j][i] = epsilon*grad[j] + alpha*dW [j][i];
                 W [j][i] += dW [j][i];
+                //printf ("for sin %d to %d: grad = %lf, dW = %lf\n", i, j, grad[j], dW [j][i]);
             }
 
         }
-
+        //printf ("delta %d = %lf\n\n", i, w_delta * delta[i]);
         delta [i] *= w_delta;
 
     }

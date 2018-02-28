@@ -3,7 +3,7 @@
 #include <string.h>
 
 const int MAT_SIZE = 5;
-const float epsilon = 0.7, alpha = 0.3;
+const float epsilon = 1.9, alpha = 0.3;
 
 class nn
 {

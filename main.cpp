@@ -12,28 +12,34 @@ int main ()
     W[4][3] = -2.3;
 
     nn XOR(W, sigm);
-
-    printf ("10 is %lf\n", XOR.compute(1, 0, MAT_SIZE - 1));
-    /*printf ("01 is %lf\n", XOR.compute(0, 1, MAT_SIZE - 1));
+    printf ("00 is %lf\n", XOR.compute(0, 0, MAT_SIZE - 1));
+    XOR.bp (0, 0);
+    XOR.bp (0, 0);
+    XOR.bp (0, 0);
+    printf ("00 is %lf\n", XOR.compute(0, 0, MAT_SIZE - 1));
+    printf ("00 is %lf\n", XOR.compute(0, 0, MAT_SIZE - 1));
+    printf ("01 is %lf\n", XOR.compute(0, 1, MAT_SIZE - 1));
     printf ("11 is %lf\n", XOR.compute(1, 1, MAT_SIZE - 1));
     printf ("00 is %lf\n", XOR.compute(0, 0, MAT_SIZE - 1));
 
     printf ("err is %lf \n\n", XOR.GetError());
 
-    for (int i = 0; i < 10; i ++)
+    for (int i = 0; i < 1000; i ++)
     {
+        
         XOR.bp (1, 0);
-        XOR.bp (0, 1);
-        XOR.bp (1, 1);
         XOR.bp (0, 0);
+        XOR.bp (0, 1);   
+        XOR.bp (1, 1);
     }
+
 
     printf ("10 is %lf\n", XOR.compute(1, 0, MAT_SIZE - 1));
     printf ("01 is %lf\n", XOR.compute(0, 1, MAT_SIZE - 1));
     printf ("11 is %lf\n", XOR.compute(1, 1, MAT_SIZE - 1));
     printf ("00 is %lf\n", XOR.compute(0, 0, MAT_SIZE - 1));
 
-    printf ("err is %lf \n\n", XOR.GetError());    */
+    printf ("err is %lf \n\n", XOR.GetError());    
 
     return 0;
 }
