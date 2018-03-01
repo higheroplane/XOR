@@ -13,6 +13,7 @@ float nn::compute (int i0, int i1, int vertex_num)
     if      (vertex_num == 0) return (float) i0;
     else if (vertex_num == 1) return (float) i1;
     else if (vertex_num == 2) return 1.0;
+    else if (vertex_num == 3) return 1.0;
     else
     {
         for (int i = 0; i < MAT_SIZE; i ++)
@@ -32,7 +33,7 @@ float nn::GetError ()
 
     for (int i = 0; i < 2; i ++)
         for (int j = 0; j < 2; j ++)
-            error += pow (compute (i, j, MAT_SIZE - 1) - (i xor j), 2);
+            error += pow (compute (i, j, MAT_SIZE - 1) - (i binop j), 2);
 
     return error/4;
 }
@@ -42,7 +43,7 @@ void nn:: bp (int i0, int i1)
     float delta [MAT_SIZE] = {};
 
     float res = compute (i0, i1, MAT_SIZE - 1);
-    int ideal = (i1 xor i0);
+    int ideal = (i1 binop i0);
     //printf ("=%d=\n", ideal);
     delta [MAT_SIZE - 1]  =  (ideal - res) * (1 - res) * res;
    // printf ("delta out = %lf\n\n", delta [MAT_SIZE - 1] ); 
@@ -56,7 +57,7 @@ void nn:: bp (int i0, int i1)
 
         for (int j = 0; j < MAT_SIZE; j ++)
         {
-            if (W[j][i])
+            if (fabs (W[j][i]) > 1e-10)
             {
                 w_delta += W [j][i] * delta [j];
                 //printf ("deltaj %d = %lf\n", j, w_delta); 
@@ -70,6 +71,17 @@ void nn:: bp (int i0, int i1)
         //printf ("delta %d = %lf\n\n", i, w_delta * delta[i]);
         delta [i] *= w_delta;
 
+    }
+}
+
+void nn:: PrintWeights ()
+{
+    for (int i = 0; i < MAT_SIZE; i ++)
+    {
+        for (int j = 0; j < MAT_SIZE; j ++)
+            printf ("%lf ", W [j][i]);
+
+        printf ("\n");
     }
 }
 

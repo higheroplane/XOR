@@ -2,8 +2,10 @@
 #include <cmath>
 #include <string.h>
 
-const int MAT_SIZE = 6;
-const float epsilon = 1.9, alpha = 0.5;
+#define binop ==
+
+const int MAT_SIZE = 7;
+extern float epsilon, alpha;
 
 class nn
 {
@@ -17,6 +19,7 @@ class nn
     float compute (int i0, int i1, int vertex_num);
     float GetError ();
     void bp (int i0, int i1);
+    void PrintWeights ();
 };
 
 float sigm (float in);
